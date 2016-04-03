@@ -1,5 +1,8 @@
 # cancel
 
+[![npm version](https://badge.fury.io/js/cancel.svg)](https://badge.fury.io/js/cancel)
+[![Build Status](https://api.travis-ci.org/nickuraltsev/cancel.svg?branch=master)](https://travis-ci.org/nickuraltsev/cancel)
+
 Cooperative cancellation
 
 ## Installation
