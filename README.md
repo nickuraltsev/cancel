@@ -18,8 +18,11 @@ npm install cancel
 ```js
 import Cancellation, { CancellationError } from 'cancel';
 
+// This is an example of a simple HTTP client for the browser that supports cancellation
 function sendRequest(method, url, body, cancellation) {
+  // Check if cancellation has already been requested
   if (cancellation.isCanceled()) {
+    // Reject with CancellationError so that the caller can distinguish between cancellation and failure
     return Promise.reject(new CancellationError('Request has been canceled.'));
   };
 
@@ -34,8 +37,11 @@ function sendRequest(method, url, body, cancellation) {
 
     request.onerror = () => reject(new Error('A network error has occurred.'));
 
+    // Add a listener that will be called when cancellation is requested
     cancellation.onCancel(() => {
+      // Abort the HTTP request
       request.abort();
+      // Reject with CancellationError so that the caller can distinguish between cancellation and failure
       reject(new CancellationError('Request has been canceled.'));
     });
 
@@ -57,7 +63,7 @@ sendRequest('GET', 'https://api.github.com/users/nickuraltsev/starred', null, ca
 
 // ...
 
-cancellation.cancel();
+cancellation.cancel(); 
 ```
 
 ## API
@@ -68,27 +74,29 @@ cancellation.cancel();
 
 Creates a new `Cancellation` object.
 
-#### .cancel()
+#### Instance methods
+
+##### cancel()
 
 Issues a cancellation request.
 
 It is safe to call this method multiple times since all but the first call are ignored.
 
-#### .isCanceled()
+##### isCanceled()
 
 Returns `true` if cancellation has been requested; otherwise, returns `false`.
 
-#### .onCancel(listener)
+##### onCancel(listener)
 
 Adds a listener to be notified when cancellation is requested.
 
-##### Parameters
+###### Parameters
 
 * `listener` - A function to be called when cancellation is requested.
 
 Returns a function that, when called, removes the listener.
 
-#### .throwIfCanceled
+##### throwIfCanceled()
 
 Throws a `CancellationError` if cancellation has been requested.
 
