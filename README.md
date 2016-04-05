@@ -112,12 +112,6 @@ Creates a new instance of `CancellationError`.
 
 * `message` - The error message.
 
-##### Example
-
-```js
-throw new CancellationError('Operation has been canceled.');
-```
-
 ## License
 
 [MIT](https://github.com/nickuraltsev/cancel/blob/master/LICENSE)
