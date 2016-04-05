@@ -18,11 +18,11 @@ npm install cancel
 ```js
 import Cancellation, { CancellationError } from 'cancel';
 
-// This is an example of a simple HTTP client for the browser that supports cancellation
+// This is an example of a simple HTTP client that supports cancellation
 function sendRequest(method, url, body, cancellation) {
   // Check if cancellation has already been requested
   if (cancellation.isCanceled()) {
-    // Reject with CancellationError so that the caller can distinguish between cancellation and failure
+    // Reject with `CancellationError` so that the caller can distinguish between cancellation and failure
     return Promise.reject(new CancellationError('Request has been canceled.'));
   };
 
@@ -41,7 +41,7 @@ function sendRequest(method, url, body, cancellation) {
     cancellation.onCancel(() => {
       // Abort the HTTP request
       request.abort();
-      // Reject with CancellationError so that the caller can distinguish between cancellation and failure
+      // Reject with `CancellationError` so that the caller can distinguish between cancellation and failure
       reject(new CancellationError('Request has been canceled.'));
     });
 
