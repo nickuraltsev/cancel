@@ -62,4 +62,25 @@ export default class Cancellation {
       }
     };
   }
+
+  /**
+   * Creates a child `Cancellation` object.
+   *
+   * @returns {Cancellation}
+   */
+  fork() {
+    if (this.internalIsCanceled) {
+      return Cancellation.CANCELED;
+    }
+
+    const child = new Cancellation();
+    this.onCancel(() => child.cancel());
+    return child;
+  }
 }
+
+/*
+ * A `Cancellation` object that is already in the canceled state.
+ */
+Cancellation.CANCELED = new Cancellation();
+Cancellation.CANCELED.internalIsCanceled = true;
