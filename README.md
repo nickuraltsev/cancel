@@ -100,6 +100,10 @@ Returns a function that, when called, removes the listener.
 
 Throws a `CancellationError` if cancellation has been requested.
 
+##### fork()
+
+Creates a child `Cancellation` object that will be canceled when the parent object is canceled.
+
 ### CancellationError
 
 The error that is thrown when an operation is canceled.
