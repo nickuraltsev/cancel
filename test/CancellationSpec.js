@@ -75,4 +75,44 @@ describe('Cancellation', () => {
       removeListener();
     });
   });
+
+  describe('#fork', () => {
+    describe('when called on a Cancellation that is in non-canceled state', () => {
+      it('returns a new Cancellation that is in non-canceled state', () => {
+        const childCancellation = cancellation.fork();
+        childCancellation.should.not.equal(cancellation);
+        childCancellation.isCanceled().should.be.false();
+      });
+    });
+
+    describe('when called on a Cancellation that is in canceled state', () => {
+      it('returns a Cancellation that is in canceled state', () => {
+        cancellation.cancel();
+        cancellation.fork().isCanceled().should.be.true();
+      });
+    });
+  });
+
+  describe('child Cancellation', () => {
+    it('transitions to canceled state when parent object is canceled', () => {
+      const childCancellation = cancellation.fork();
+      cancellation.cancel();
+      childCancellation.isCanceled().should.be.true();
+    });
+  });
+
+  describe('parent Cancellation', () => {
+    it('does not transition to canceled state when child object is canceled', () => {
+      const childCancellation = cancellation.fork();
+      childCancellation.cancel();
+      childCancellation.isCanceled().should.be.true();
+      cancellation.isCanceled().should.be.false();
+    });
+  });
+
+  describe('CANCELED', () => {
+    it('contains a Cancellation that is in canceled state', () => {
+      Cancellation.CANCELED.isCanceled().should.be.true();
+    });
+  });
 });
