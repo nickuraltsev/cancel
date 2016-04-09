@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/cancel.svg)](https://badge.fury.io/js/cancel)
 [![Build Status](https://api.travis-ci.org/nickuraltsev/cancel.svg?branch=master)](https://travis-ci.org/nickuraltsev/cancel)
 
-Cooperative cancellation
+Cancellable asynchronous operations
 
 ## Installation
 
@@ -18,7 +18,9 @@ npm install cancel
 ```js
 import Cancellation, { CancellationError } from 'cancel';
 
-// This is an example of a simple HTTP client that supports cancellation
+// This is an example of a simple HTTP client that supports cancellation.
+// The `sendRequest` method sends an HTTP request asynchronously. 
+// It takes a `Cancellation` object as one of its parameters.
 function sendRequest(method, url, body, cancellation) {
   // Check if cancellation has already been requested
   if (cancellation.isCanceled()) {
@@ -115,6 +117,12 @@ Creates a new instance of `CancellationError`.
 ##### Parameters
 
 * `message` - The error message.
+
+#### Static properties
+
+##### CANCELED
+
+Contains a `Cancellation` object that is already in the canceled state. 
 
 ## License
 
