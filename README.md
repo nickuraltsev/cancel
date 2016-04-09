@@ -19,8 +19,7 @@ npm install cancel
 import Cancellation, { CancellationError } from 'cancel';
 
 // This is an example of a simple HTTP client that supports cancellation.
-// The `sendRequest` method sends an HTTP request asynchronously. 
-// It takes a `Cancellation` object as one of its parameters.
+// The `sendRequest` method sends an HTTP request asynchronously. It takes a `Cancellation` object as one of its parameters.
 function sendRequest(method, url, body, cancellation) {
   // Check if cancellation has already been requested
   if (cancellation.isCanceled()) {
@@ -106,6 +105,12 @@ Throws a `CancellationError` if cancellation has been requested.
 
 Creates a child `Cancellation` object that will be canceled when the parent object is canceled.
 
+#### Static properties
+
+##### CANCELED
+
+Contains a `Cancellation` object that is already in the canceled state. 
+
 ### CancellationError
 
 The error that is thrown when an operation is canceled.
@@ -117,12 +122,6 @@ Creates a new instance of `CancellationError`.
 ##### Parameters
 
 * `message` - The error message.
-
-#### Static properties
-
-##### CANCELED
-
-Contains a `Cancellation` object that is already in the canceled state. 
 
 ## License
 
