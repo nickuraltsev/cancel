@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/cancel.svg)](https://badge.fury.io/js/cancel)
 [![Build Status](https://api.travis-ci.org/nickuraltsev/cancel.svg?branch=master)](https://travis-ci.org/nickuraltsev/cancel)
 
-Cancellable asynchronous operations
+A JavaScript library that provides primitives for creating cancelable asynchronous operations.
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm install cancel
 import Cancellation, { CancellationError } from 'cancel';
 
 // This is an example of a simple HTTP client that supports cancellation.
-// The `sendRequest` method sends an HTTP request asynchronously. 
+// The `sendRequest` method sends an HTTP request asynchronously.
 // It takes a `Cancellation` object as one of its parameters.
 function sendRequest(method, url, body, cancellation) {
   // Check if cancellation has already been requested
@@ -51,8 +51,10 @@ function sendRequest(method, url, body, cancellation) {
   });
 }
 
+// Create a new `Cancellation` object
 const cancellation = new Cancellation();
 
+// Pass the `Cancellation` object to the `sendRequest` method
 sendRequest('GET', 'https://api.github.com/users/nickuraltsev/starred', null, cancellation)
   .then(response => console.log(`Response status: ${response.status}`))
   .catch(error => {
@@ -64,8 +66,8 @@ sendRequest('GET', 'https://api.github.com/users/nickuraltsev/starred', null, ca
   });
 
 // ...
-
-cancellation.cancel(); 
+// Cancel the request
+cancellation.cancel();
 ```
 
 ## API
@@ -110,7 +112,7 @@ Creates a child `Cancellation` object that will be canceled when the parent obje
 
 ##### CANCELED
 
-Contains a `Cancellation` object that is already in the canceled state. 
+Contains a `Cancellation` object that is already in the canceled state.
 
 ### CancellationError
 

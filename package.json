@@ -1,6 +1,6 @@
 {
   "name": "cancel",
-  "description": "Cooperative cancellation",
+  "description": "A JavaScript library that provides primitives for creating cancelable asynchronous operations.",
   "version": "0.1.0",
   "keywords": [
       "cancel",
