@@ -126,6 +126,10 @@ Creates a new instance of `CancellationError`.
 
 * `message` - The error message.
 
+## Semver
+
+Prior to the release 1.0, minor versions may introduce breaking changes.
+
 ## License
 
 [MIT](https://github.com/nickuraltsev/cancel/blob/master/LICENSE)
